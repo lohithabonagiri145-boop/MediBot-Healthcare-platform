@@ -1,0 +1,197 @@
+/* Dashboard Specific Styles */
+.dashboard-body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    overflow: hidden; /* Avoid double scrolling since container has it */
+}
+
+/* We don't need a separate header since we'll reuse the global navbar */
+
+/* Main Container */
+.dashboard-container {
+    display: flex;
+    height: calc(100vh - 72px); /* 72px is approx navbar height */
+}
+
+/* Sidebar */
+.sidebar {
+    width: 300px;
+    background: var(--navbar-bg);
+    padding: 2rem 1.5rem;
+    box-shadow: 2px 0 20px rgba(0,0,0,0.05);
+    overflow-y: auto;
+    transition: transform 0.3s ease;
+    border-right: 1px solid var(--border-color);
+    z-index: 90;
+}
+
+[data-theme="dark"] .sidebar {
+    box-shadow: 2px 0 20px rgba(0,0,0,0.5);
+}
+
+.sidebar h3 {
+    color: var(--primary-blue);
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.filter-group {
+    margin-bottom: 1.5rem;
+}
+
+.filter-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--text-color);
+    opacity: 0.9;
+}
+
+.filter-group select,
+.filter-group input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: var(--bg-color);
+    color: var(--text-color);
+}
+
+.filter-group select:focus,
+.filter-group input:focus {
+    outline: none;
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.1);
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+/* KPI Cards */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.kpi-card {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-top: 4px solid transparent;
+    border: 1px solid var(--border-color);
+    border-top-width: 4px;
+}
+
+.kpi-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--hover-shadow);
+}
+
+.kpi-card.total-patients { border-top-color: var(--primary-blue); }
+.kpi-card.avg-cost { border-top-color: var(--danger); }
+.kpi-card.recovery-rate { border-top-color: var(--success); }
+.kpi-card.avg-satisfaction { border-top-color: var(--warning); }
+
+.kpi-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.kpi-label {
+    color: var(--text-color);
+    opacity: 0.7;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+/* Charts Grid */
+.charts-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.chart-container {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    height: 400px;
+    border: 1px solid var(--border-color);
+}
+
+.chart-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .sidebar {
+        transform: translateX(-100%);
+        position: fixed;
+        left: 0;
+        top: 72px; /* adjust based on navbar */
+        height: calc(100vh - 72px);
+    }
+    
+    .sidebar.open {
+        transform: translateX(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .charts-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .kpi-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.kpi-card, .chart-container {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-color);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-blue);
+    border-radius: 10px;
+}

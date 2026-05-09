@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthcare Analytics Dashboard | MediCare</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Plotly -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body class="dashboard-body">
+    
+    <!-- Navigation (Reused from Main Site) -->
+    <nav class="navbar">
+        <a href="index.html" class="logo">
+            <i class="fas fa-heartbeat"></i> MediCare
+        </a>
+        <div class="nav-links">
+            <a href="index.html#home">Home</a>
+            <a href="index.html#services">Services</a>
+            <a href="index.html#doctors">Doctors</a>
+            <a href="index.html#contact">Contact</a>
+        </div>
+        <div style="display: flex; gap: 15px; align-items: center;">
+            <button id="themeToggle" class="theme-toggle" aria-label="Toggle Theme">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button class="mobile-menu-btn" aria-label="Toggle Menu" onclick="document.querySelector('.sidebar').classList.toggle('open')">
+                <i class="fas fa-filter"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="dashboard-container">
+        <!-- Sidebar Filters -->
+        <aside class="sidebar" id="sidebar">
+            <h3><i class="fas fa-search"></i> Filters</h3>
+            
+            <div class="filter-group">
+                <label for="departmentFilter">Department</label>
+                <select id="departmentFilter">
+                    <option value="">All Departments</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="diseaseFilter">Disease Type</label>
+                <select id="diseaseFilter">
+                    <option value="">All Diseases</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="branchFilter">Hospital Branch</label>
+                <select id="branchFilter">
+                    <option value="">All Branches</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="recoveryFilter">Recovery Status</label>
+                <select id="recoveryFilter">
+                    <option value="">All Status</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="searchInput">Search Patients</label>
+                <input type="text" id="searchInput" placeholder="Search name or ID...">
+            </div>
+
+            <div class="filter-group">
+                <label for="dateRange">Admission Date</label>
+                <input type="month" id="dateRange">
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- KPI Cards -->
+            <div class="kpi-grid">
+                <div class="kpi-card total-patients">
+                    <div class="kpi-value" id="totalPatients">0</div>
+                    <div class="kpi-label">Total Patients</div>
+                </div>
+                <div class="kpi-card avg-cost">
+                    <div class="kpi-value" id="avgCost">$0</div>
+                    <div class="kpi-label">Avg Treatment Cost</div>
+                </div>
+                <div class="kpi-card recovery-rate">
+                    <div class="kpi-value" id="recoveryRate">0%</div>
+                    <div class="kpi-label">Recovery Rate</div>
+                </div>
+                <div class="kpi-card avg-satisfaction">
+                    <div class="kpi-value" id="avgSatisfaction">0</div>
+                    <div class="kpi-label">Avg Satisfaction</div>
+                </div>
+            </div>
+
+            <!-- Charts Section -->
+            <div class="charts-grid">
+                <div class="chart-container">
+                    <div class="chart-title">📊 Patients by Department</div>
+                    <div id="barChart" style="width:100%;height:320px;"></div>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">📈 Monthly Admissions Trend</div>
+                    <div id="lineChart" style="width:100%;height:320px;"></div>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">🥧 Recovery Status Distribution</div>
+                    <div id="pieChart" style="width:100%;height:320px;"></div>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">📍 Cost vs Satisfaction</div>
+                    <div id="scatterChart" style="width:100%;height:320px;"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
